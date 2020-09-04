@@ -1,65 +1,63 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import { useState } from "react";
+import Router from "next/router";
+// import styles from "../styles/Home.module.css";
+import { Button } from "reactstrap";
+import Link from "next/link";
+import cookies from "next-cookies";
+import http from "../lib/httpService";
+import { getJwt } from "../lib/auth";
+import AppContext from "../context/AppContext";
 
 export default function Home() {
+  // 1) are we authenticated and if so display the user info somewhere
+  // 2) every page needs to display the user info when authenticated
+
+  async function doSubmit(e) {
+    try {
+      // Get the jwt from the "auth" cookie using our auth service
+      const jwt = getJwt();
+      // If not defined or null or whatever then send to login page
+      if (!jwt) {
+        Router.push("/login");
+        return;
+      }
+      // This next stuff will be put into a service
+      const response = await http.get("http://localhost:1337/restaurants", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    } catch (e) {
+      // ** This should only be known 400 erros
+      // ** All unexpected errors are handled by httpService
+
+      //Redirect to the login page
+      console.log("Failed");
+    }
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+    <div>
+      <h1>Home Page</h1>
+      <Link href="/test">
+        <a>Test</a>
+      </Link>
+      <div>
+        <Button color="primary" onClick={doSubmit}>
+          Get all
+        </Button>
+      </div>
     </div>
-  )
+  );
 }
+
+// export async function getServerSideProps(ctx) {
+//   const { auth } = cookies(ctx);
+//   let isAuthenticated = false;
+//   if (auth) {
+//     isAuthenticated = true;
+//   }
+
+//   return { props: { isAuthenticated: isAuthenticated } };
+// }
