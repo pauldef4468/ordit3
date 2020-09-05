@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Router from "next/router";
-import { Button } from "reactstrap";
 import auth from "../lib/auth";
 import AppContext from "../context/AppContext";
 import { useContext } from "react";
@@ -29,6 +28,9 @@ function Login(props) {
   return (
     <div>
       <h1>Login</h1>
+      <button type="button" onClick={doSubmit}>
+        Click to login
+      </button>
     </div>
   );
 }

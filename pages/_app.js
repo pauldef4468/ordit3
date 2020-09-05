@@ -1,53 +1,50 @@
-// import '../styles/globals.css'
 import { useState, useEffect } from "react";
+import Cookie from "js-cookie";
+
 import Layout from "../components/Layout";
 import AppContext from "../context/AppContext";
 import { getJwt } from "../lib/auth";
 import { getMe } from "../lib/userService";
-import Cookie from "js-cookie";
 
 function MyApp({ Component, pageProps }) {
-  // From what I can tell this gets ran on every page load using any navigation method
-  console.log("Entered MyApp");
+  /** MyApp will run on every page load using any navigation method */
 
-  //Set the State variable to an object which contains a user property
-  // const [userObj, setUserObj] = useState({ user: null });
-  // const [userObj, setUserObj] = useState({});
+  // Initialize the "user"
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    // This only gets ran one time and on the client if using Link or Router and
-    // everytime full reload of the page using the browser navigation
-    console.log("Running useEffect");
-    const jwt = getJwt();
+    /** This useEffect will only run one time and on the client if using Link or Router and 
+      everytime full reload of the page using the browser navigation
+    */
 
+    // If the jwt is set then get the user from the server and set the user
+    const jwt = getJwt();
+    // Function to call from below
     async function getUser() {
       try {
+        // Logged in so set the user object
         const response = await getMe();
         const user = response.data;
-        console.log(user);
         setThisUser(user);
       } catch (e) {
-        console.log(
-          "getMe got nothing so removing auth cookie if it's even there"
-        );
+        // Not logged in or has expired, remove the jwt cookie
         Cookie.remove("auth");
-        // setUserObj({ user: null });
         setUser({});
         return null;
       }
     }
-
+    // Call the above logic
     if (jwt) {
       getUser();
     }
   }, []);
 
-  const setThisUser = (newUserObj) => {
+  // Function used to set the user which will update the context when this renders
+  const setThisUser = (newUser) => {
     //Set the state variable with this new user object
     //This will cause this page to render
     // setUserObj({ user: newUserObj });
-    setUser(newUserObj);
+    setUser(newUser);
   };
 
   return (
