@@ -4,8 +4,6 @@ import auth from "../lib/auth";
 import AppContext from "../context/AppContext";
 import { useContext } from "react";
 
-const ORDIT_URL = process.env.NEXT_PUBLIC_ORDIT_URL || "http://localhost:3000";
-
 function Login(props) {
   const [data, setData] = useState({ username: "user1", password: "user123" });
 
