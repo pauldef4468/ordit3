@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# I added this because of warning when deplying to Vercel
+.package-lock.json
