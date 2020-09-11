@@ -12,7 +12,7 @@ function Organization(props) {
   // Get the logged in user
   const { user } = useContext(AppContext);
   const router = useRouter();
-  const orgId = router.query.id;
+  const orgId = router.query.id; // Query is an empty object {} if page loaded from server
 
   // Function to retrieve the organization data
   async function getOrg() {
