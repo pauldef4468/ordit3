@@ -1,0 +1,52 @@
+import { useRouter } from "next/router";
+import { useContext, useState, useEffect } from "react";
+import { getOrganization } from "../../lib/organizationService";
+import AppContext from "../../context/AppContext";
+import Loading from "../../components/common/Loading";
+import _ from "lodash";
+
+function Organization(props) {
+  // Initialize the data we will display
+  const [org, setOrg] = useState(null);
+
+  // Get the logged in user
+  const { user } = useContext(AppContext);
+  const router = useRouter();
+  const orgId = router.query.id;
+
+  // Function to retrieve the organization data
+  async function getOrg() {
+    try {
+      const response = await getOrganization(orgId);
+      const newOrg = response.data;
+      setOrg(newOrg);
+    } catch (e) {
+      console.error(e);
+      alert("Something went wrong retrieving data");
+    }
+  }
+
+  useEffect(() => {
+    // This only runs when user and orgId changes
+    // Only try to get the data if we have valid data
+    if (_.isEmpty(user)) return;
+    if (!orgId) return;
+    // Call the function to get data
+    getOrg();
+  }, [user, orgId]);
+
+  return (
+    <div>
+      {org ? (
+        <div>
+          <h1>{org.name}</h1>
+          <h4>{org.description}</h4>
+        </div>
+      ) : (
+        <Loading user={user} />
+      )}
+    </div>
+  );
+}
+
+export default Organization;

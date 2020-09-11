@@ -17,41 +17,60 @@ export default function Layout(props) {
         <title>Ordit</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        {/* <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossOrigin="anonymous"
-        /> */}
-        {/* <script src="https://js.stripe.com/v3" /> */}
       </Head>
 
-      <Link href="/">
-        <a>Home</a>
-      </Link>
-
-      <Link href="/test">
-        <a>Test</a>
-      </Link>
-
+      <div>
+        <Link href="/">
+          <a>Home&nbsp;</a>
+        </Link>
+      </div>
+      <div>
+        <Link href="/organizations">
+          <a>Organizations&nbsp;</a>
+        </Link>
+      </div>
+      <div>
+        <Link href="/test">
+          <a>Test&nbsp;</a>
+        </Link>
+      </div>
       {_.isEmpty(user) ? (
-        <Link href="/login">
-          <a className="navbar-link">Login</a>
-        </Link>
+        <div>
+          <Link href="/login">
+            <a>Login&nbsp;</a>
+          </Link>
+        </div>
       ) : (
-        <Link href="/login">
-          <a
-            className="nav-link"
-            onClick={() => {
-              logout();
-              // setUser({ user: null });
-              setUser(null);
-            }}
-          >
-            Logout
-          </a>
-        </Link>
+        <div>
+          <Link href="/login">
+            <a
+              onClick={() => {
+                logout();
+                // setUser({ user: null });
+                setUser(null);
+              }}
+            >
+              Logout&nbsp;
+            </a>
+          </Link>
+        </div>
       )}
+      {_.isEmpty(user) && (
+        <div>
+          <Link href="/register">
+            <a>Register</a>
+          </Link>
+        </div>
+      )}
+      <div>
+        {_.isEmpty(user) ? (
+          <h4>You are not logged in</h4>
+        ) : (
+          <p>
+            You are logged in as {user.username} and your email is {user.email}
+          </p>
+        )}
+      </div>
       <div>{props.children}</div>
     </div>
   );

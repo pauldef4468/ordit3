@@ -1,5 +1,4 @@
 import Link from "next/link";
-import cookies from "next-cookies";
 
 function test() {
   return (

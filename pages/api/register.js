@@ -7,11 +7,12 @@ const STRAPI_URL =
 export default async (req, res) => {
   if (req.method === "POST") {
     //*** Call strapi login api ***
-    const strapiEndpoint = STRAPI_URL + "/auth/local";
+    const strapiEndpoint = STRAPI_URL + "/auth/local/register";
     //Send data - the identifier can be email or user name
     const data = {
-      identifier: req.body.identifier,
+      username: req.body.username,
       password: req.body.password,
+      email: req.body.email,
     };
     try {
       //Call to strapi

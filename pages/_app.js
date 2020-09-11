@@ -5,12 +5,15 @@ import Layout from "../components/Layout";
 import AppContext from "../context/AppContext";
 import { getJwt } from "../lib/auth";
 import { getMe } from "../lib/userService";
+import _ from "lodash";
 
 function MyApp({ Component, pageProps }) {
   /** MyApp will run on every page load using any navigation method */
 
   // Initialize the "user"
   const [user, setUser] = useState({});
+
+  // console.log("Here in myApp");
 
   useEffect(() => {
     /** This useEffect will only run one time and on the client if using Link or Router and 
@@ -44,6 +47,7 @@ function MyApp({ Component, pageProps }) {
     //Set the state variable with this new user object
     //This will cause this page to render
     // setUserObj({ user: newUserObj });
+    // console.log(newUser, "Here in setThisUser");
     setUser(newUser);
   };
 
@@ -51,7 +55,7 @@ function MyApp({ Component, pageProps }) {
     <AppContext.Provider
       value={{
         user: user,
-        isAuthenticated: !!user,
+        isAuthenticated: !_.isEmpty(user),
         setUser: setThisUser,
       }}
     >

@@ -6,8 +6,8 @@ import { useContext } from "react";
 
 const ORDIT_URL = process.env.NEXT_PUBLIC_ORDIT_URL || "http://localhost:3000";
 
-function Login(props) {
-  const [data, setData] = useState({ username: "user1", password: "user123" });
+function Register(props) {
+  const [data, setData] = useState({ username: "", password: "", email: "" });
 
   const [errors, setErrors] = useState(null);
   const { user, setUser } = useContext(AppContext);
@@ -16,13 +16,21 @@ function Login(props) {
     e.preventDefault();
     try {
       // Login and server will set cookie with name "auth"
-      const response = await auth.login(data.username, data.password);
+      const response = await auth.register(
+        data.username,
+        data.password,
+        data.email
+      );
       const user = response.data.user;
+      //   const response = await getMe();
+      //   const user = response.data;
+
       setUser(user);
 
       Router.push("/");
     } catch (e) {
-      console.error("Login failed");
+      alert("Registration Failed");
+      console.error("Registration failed");
     }
   }
 
@@ -39,7 +47,7 @@ function Login(props) {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <form onSubmit={doSubmit}>
         <label htmlFor="username">User Name:</label>
         <br />
@@ -48,6 +56,17 @@ function Login(props) {
           id="username"
           name="username"
           value={data.username}
+          onChange={handleChange}
+        />
+        <br />
+        <br />
+        <label htmlFor="email">Email:</label>
+        <br />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={data.email}
           onChange={handleChange}
         />
         <br />
@@ -69,4 +88,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default Register;
