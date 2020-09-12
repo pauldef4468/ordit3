@@ -35,11 +35,18 @@ export default function Layout(props) {
         </Link>
       </div>
       {_.isEmpty(user) ? (
-        <div>
-          <Link href="/login">
-            <a>Login&nbsp;</a>
-          </Link>
-        </div>
+        <>
+          <div>
+            <Link href="/login">
+              <a>Login&nbsp;</a>
+            </Link>
+          </div>
+          <div>
+            <Link href="/forgotpw">
+              <a>Forgot Password&nbsp;</a>
+            </Link>
+          </div>
+        </>
       ) : (
         <div>
           <Link href="/login">
@@ -53,6 +60,11 @@ export default function Layout(props) {
               Logout&nbsp;
             </a>
           </Link>
+          {/* <div>
+            <Link href="/resetpw">
+              <a>Reset Password&nbsp;</a>
+            </Link>
+          </div> */}
         </div>
       )}
       {_.isEmpty(user) && (
