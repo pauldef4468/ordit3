@@ -6,7 +6,7 @@ import http from "../lib/httpService";
 export default function Home() {
   return (
     <div>
-      <h1>Home Page 2</h1>
+      <h1>Home Page</h1>
       <Link href="/test">
         <a>Test</a>
       </Link>
