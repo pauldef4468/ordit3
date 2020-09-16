@@ -26,7 +26,6 @@ function Organizations() {
   }
 
   useEffect(() => {
-    console.log(user);
     // Don't try to get data if not logged in
     if (_.isEmpty(user)) return;
 
@@ -35,7 +34,7 @@ function Organizations() {
   }, [user]);
 
   return (
-    <Container className="container-fluid">
+    <>
       <h1>Organizations Page </h1>
       {data ? (
         data.map((org) => {
@@ -52,7 +51,7 @@ function Organizations() {
       ) : (
         <Loading user={user} />
       )}
-    </Container>
+    </>
   );
 }
 

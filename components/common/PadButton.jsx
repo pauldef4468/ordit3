@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-// import styles from "./PadButton.module.css";
+import styles from "./PadButton.module.css";
 
 function PadButton({ label, validate }) {
   return (

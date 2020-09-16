@@ -28,6 +28,7 @@ class form {
   validate() {
     const options = { abortEarly: false };
     const { error } = Joi.validate(this.data, this.schema, options);
+
     if (!error) return null;
 
     const errors = {};
@@ -56,6 +57,7 @@ class form {
     this.setErrors(errors);
   };
   handleSubmit = (e) => {
+    console.log("Here");
     e.preventDefault();
 
     const errors = this.validate();

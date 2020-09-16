@@ -6,12 +6,9 @@ import http from "../lib/httpService";
 
 export default function Home() {
   return (
-    <Container className="container-fluid">
+    <>
       <h1>Home Page</h1>
-      <Link href="/test">
-        <a>Test</a>
-      </Link>
-    </Container>
+    </>
   );
 }
 

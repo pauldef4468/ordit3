@@ -5,7 +5,10 @@ function Loading({ user }) {
   if (_.isEmpty(user)) {
     return (
       <div>
-        <p>You are not logged in please login or sign up</p>
+        <p>
+          You are not logged in please <Link href="/login">login</Link> or{" "}
+          <Link href="/register">register</Link>.
+        </p>
         <Link href="/login">
           <a>Login&nbsp;</a>
         </Link>
