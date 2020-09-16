@@ -25,6 +25,7 @@ function Organizations() {
   }
 
   useEffect(() => {
+    console.log(user);
     // Don't try to get data if not logged in
     if (_.isEmpty(user)) return;
 

@@ -7,17 +7,26 @@ function ResetPw() {
   const [data, setData] = useState({ password: "", passwordConfirmation: "" });
   const router = useRouter();
   const code = router.query.code;
-  console.log(code);
+
+  //   const hasMounted = useHasMounted();
+  //   if (!hasMounted) {
+  //     return null;
+  //   } else {
+  //     return null;
+  //   }
+
   //   if (!code) {
   //     Router.push("/");
   //   }
   //   const [errors, setErrors] = useState(null);
 
-  useEffect(() => {
-    if (!code) {
-      Router.push("/");
-    }
-  }, []);
+  //   useEffect(() => {
+  //     console.log(code);
+  //     if (!code) {
+  //       console.log("here");
+  //       //Router.push("/");
+  //     }
+  //   }, [code]);
 
   async function doSubmit(e) {
     e.preventDefault();
@@ -77,5 +86,11 @@ function ResetPw() {
     </div>
   );
 }
+
+// export async function getServerSideProps(ctx) {
+//   // Pass data to the page via props
+//   return { props: { code1: ctx.query } };
+
+// }
 
 export default ResetPw;

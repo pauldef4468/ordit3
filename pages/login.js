@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Router from "next/router";
+import Link from "next/link";
 import auth from "../lib/auth";
 import AppContext from "../context/AppContext";
 import { useContext } from "react";
 
 function Login(props) {
   const [data, setData] = useState({ username: "user1", password: "user123" });
+  const [error, setError] = useState("");
 
   const [errors, setErrors] = useState(null);
   const { user, setUser } = useContext(AppContext);
@@ -17,9 +19,9 @@ function Login(props) {
       const response = await auth.login(data.username, data.password);
       const user = response.data.user;
       setUser(user);
-
       Router.push("/");
     } catch (e) {
+      setError("Login Failed");
       console.error("Login failed");
     }
   }
@@ -62,6 +64,12 @@ function Login(props) {
         <br />
         <br />
         <input type="submit" value="Submit" />
+        <div>
+          <Link href="/forgotpw">
+            <a>Forgot Password&nbsp;</a>
+          </Link>
+        </div>
+        {error && <p style={{ color: "red" }}>Login Failed!</p>}
       </form>
     </div>
   );
