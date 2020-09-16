@@ -49,7 +49,7 @@ function Organizations() {
           );
         })
       ) : (
-        <Loading user={user} />
+        <Loading user={user} redirectParam="organizations" />
       )}
     </>
   );
