@@ -1,15 +1,18 @@
 import { useState } from "react";
 import Router from "next/router";
 import Link from "next/link";
+import { Container } from "react-bootstrap";
 import auth from "../lib/auth";
 import AppContext from "../context/AppContext";
 import { useContext } from "react";
+import Form from "react-bootstrap/Form";
+import FormUtil from "../components/common/form";
 
 function Login(props) {
   const [data, setData] = useState({ username: "user1", password: "user123" });
   const [error, setError] = useState("");
 
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState({});
   const { user, setUser } = useContext(AppContext);
 
   async function doSubmit(e) {
@@ -28,6 +31,7 @@ function Login(props) {
 
   function handleChange({ currentTarget: input }) {
     // const errors = { ...this.state.errors };
+
     // const errorMessage = this.validateProperty(input);
     // if (errorMessage) errors[input.name] = errorMessage;
     // else delete errors[input.name];
@@ -38,7 +42,7 @@ function Login(props) {
   }
 
   return (
-    <div>
+    <Container className="container-fluid">
       <h1>Login</h1>
       <form onSubmit={doSubmit}>
         <label htmlFor="username">User Name:</label>
@@ -71,7 +75,7 @@ function Login(props) {
         </div>
         {error && <p style={{ color: "red" }}>Login Failed!</p>}
       </form>
-    </div>
+    </Container>
   );
 }
 

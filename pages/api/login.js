@@ -1,5 +1,5 @@
-import http from "../../lib/httpService";
 import cookie from "cookie";
+import http from "../../lib/httpService";
 
 const STRAPI_URL =
   process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";

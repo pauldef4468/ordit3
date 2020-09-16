@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
+import { Container } from "react-bootstrap";
 import { getOrganizations } from "../lib/organizationService";
 import AppContext from "../context/AppContext";
 import Loading from "../components/common/Loading";
@@ -34,7 +35,7 @@ function Organizations() {
   }, [user]);
 
   return (
-    <div>
+    <Container className="container-fluid">
       <h1>Organizations Page </h1>
       {data ? (
         data.map((org) => {
@@ -51,7 +52,7 @@ function Organizations() {
       ) : (
         <Loading user={user} />
       )}
-    </div>
+    </Container>
   );
 }
 

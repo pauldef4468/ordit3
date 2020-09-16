@@ -1,13 +1,15 @@
 import Link from "next/link";
+import { Container, Button } from "react-bootstrap";
 
 function test() {
   return (
-    <div>
+    <Container className="container-fluid">
       <h1>Test Page</h1>
-      <Link href="/">
-        <a>Home</a>
+
+      <Link href="/" passHref>
+        <Button>Home</Button>
       </Link>
-    </div>
+    </Container>
   );
 }
 

@@ -6,6 +6,7 @@ import AppContext from "../context/AppContext";
 import { getJwt } from "../lib/auth";
 import { getMe } from "../lib/userService";
 import _ from "lodash";
+import "../styles/customTheme.scss";
 
 function MyApp({ Component, pageProps }) {
   /** MyApp will run on every page load using any navigation method */
