@@ -5,25 +5,34 @@ import Link from "next/link";
 import { logout } from "../lib/auth";
 import _ from "lodash";
 
-function MyNavbar(props) {
+function MyNavbar({ activeLink }) {
   const { user, setUser } = useContext(AppContext);
+
+  function isActive(linkName) {
+    if (!linkName) return false;
+    if (linkName === activeLink) {
+      return true;
+    }
+  }
   return (
     <div>
-      <Navbar bg="light" variant="light" expand="md">
+      <Navbar className="my-navbar" variant="dark" expand="md">
+        {/* <Navbar className="bg-success" bg="light" variant="light" expand="md"> */}
         <Navbar.Brand href="#">Ordit</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link href="/" passHref>
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link active={isActive("home")}>Home</Nav.Link>
             </Link>
+            {/* {isActive()} */}
 
             <Link href="/organizations" passHref>
-              <Nav.Link>Orgs</Nav.Link>
+              <Nav.Link active={isActive("organizations")}>Orgs</Nav.Link>
             </Link>
 
             <Link href="/test" passHref>
-              <Nav.Link>Test</Nav.Link>
+              <Nav.Link active={isActive("test")}>Test</Nav.Link>
             </Link>
 
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -64,13 +73,15 @@ function MyNavbar(props) {
             {_.isEmpty(user) ? (
               <>
                 <Link href="/login" passHref>
-                  <Nav.Link>Login</Nav.Link>
+                  <Nav.Link active={isActive("login")}>Login</Nav.Link>
                 </Link>
                 <Link href="/forgotpw" passHref>
-                  <Nav.Link>Forgot Password</Nav.Link>
+                  <Nav.Link active={isActive("forgotpw")}>
+                    Forgot Password
+                  </Nav.Link>
                 </Link>
                 <Link href="/register" passHref>
-                  <Nav.Link>Register</Nav.Link>
+                  <Nav.Link active={isActive("register")}>Register</Nav.Link>
                 </Link>
               </>
             ) : (

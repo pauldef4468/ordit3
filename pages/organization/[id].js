@@ -1,8 +1,10 @@
 import { useRouter } from "next/router";
 import { useContext, useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { getOrganization } from "../../lib/organizationService";
 import AppContext from "../../context/AppContext";
 import Loading from "../../components/common/Loading";
+import MyNavbar from "../../components/myNavbar";
 import _ from "lodash";
 
 function Organization(props) {
@@ -37,14 +39,17 @@ function Organization(props) {
 
   return (
     <div>
-      {org ? (
-        <div>
-          <h1>{org.name}</h1>
-          <h4>{org.description}</h4>
-        </div>
-      ) : (
-        <Loading user={user} />
-      )}
+      <MyNavbar activeLink="organizations"></MyNavbar>
+      <Container>
+        {org ? (
+          <div>
+            <h1>{org.name}</h1>
+            <h4>{org.description}</h4>
+          </div>
+        ) : (
+          <Loading user={user} />
+        )}
+      </Container>
     </div>
   );
 }

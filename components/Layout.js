@@ -17,10 +17,10 @@ export default function Layout(props) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script
           src="https://kit.fontawesome.com/94a6e7c62b.js"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
       </Head>
-      <MyNavbar></MyNavbar>
+
       <div>{props.children}</div>
     </>
   );

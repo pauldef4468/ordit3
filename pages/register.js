@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Router from "next/router";
+import { Container } from "react-bootstrap";
 import auth from "../lib/auth";
 import AppContext from "../context/AppContext";
 import { useContext } from "react";
 import FormUtil from "../components/common/form";
+import MyNavbar from "../components/myNavbar";
 import Joi from "joi-browser";
 
 function Register(props) {
@@ -55,29 +57,34 @@ function Register(props) {
 
   return (
     <div>
-      <h3>Register</h3>
-      <form onSubmit={formUtil.handleSubmit}>
-        {formUtil.renderInput(
-          "username",
-          "User Name",
-          "text",
-          null,
-          null,
-          false
-        )}
+      <MyNavbar activeLink="register"></MyNavbar>
+      <Container>
+        <div className="small-center-form">
+          <h3 className="mt-3">Register</h3>
+          <form onSubmit={formUtil.handleSubmit}>
+            {formUtil.renderInput(
+              "username",
+              "User Name",
+              "text",
+              null,
+              null,
+              false
+            )}
 
-        {formUtil.renderInput("email", "Email", "text", null, null, false)}
+            {formUtil.renderInput("email", "Email", "text", null, null, false)}
 
-        {formUtil.renderInput(
-          "password",
-          "Password",
-          "password",
-          null,
-          null,
-          false
-        )}
-        {formUtil.renderButton("Submit")}
-      </form>
+            {formUtil.renderInput(
+              "password",
+              "Password",
+              "password",
+              null,
+              null,
+              false
+            )}
+            {formUtil.renderButton("Submit")}
+          </form>
+        </div>
+      </Container>
     </div>
   );
 }

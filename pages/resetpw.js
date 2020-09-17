@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import Router from "next/router";
+import { Container } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { resetPassword } from "../lib/userService";
 import FormUtil from "../components/common/form";
+import MyNavbar from "../components/myNavbar";
 import Joi from "joi-browser";
 
 function ResetPw() {
@@ -69,26 +71,29 @@ function ResetPw() {
 
   return (
     <div>
-      <h3>Reset Password</h3>
-      <form onSubmit={formUtil.handleSubmit}>
-        {formUtil.renderInput(
-          "password",
-          "Password",
-          "password",
-          null,
-          null,
-          false
-        )}
-        {formUtil.renderInput(
-          "passwordConfirmation",
-          "Password Confirmation",
-          "password",
-          null,
-          null,
-          false
-        )}
-        {formUtil.renderButton("Submit")}
-      </form>
+      <MyNavbar></MyNavbar>
+      <Container>
+        <h3>Reset Password</h3>
+        <form onSubmit={formUtil.handleSubmit}>
+          {formUtil.renderInput(
+            "password",
+            "Password",
+            "password",
+            null,
+            null,
+            false
+          )}
+          {formUtil.renderInput(
+            "passwordConfirmation",
+            "Password Confirmation",
+            "password",
+            null,
+            null,
+            false
+          )}
+          {formUtil.renderButton("Submit")}
+        </form>
+      </Container>
     </div>
   );
 }

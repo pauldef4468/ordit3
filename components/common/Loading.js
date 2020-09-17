@@ -15,9 +15,6 @@ function Loading({ user, redirectParam }) {
           <Link href={`/login${getRedirect(redirectParam)}`}>login</Link> or{" "}
           <Link href={`/register${getRedirect(redirectParam)}`}>register</Link>.
         </p>
-        <Link href="/login">
-          <a>Login&nbsp;</a>
-        </Link>
       </div>
     );
   } else {

@@ -2,12 +2,16 @@ import Router from "next/router";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
 import http from "../lib/httpService";
+import MyNavbar from "../components/myNavbar";
 // import AppContext from "../context/AppContext";
 
 export default function Home() {
   return (
     <>
-      <h1>Home Page</h1>
+      <MyNavbar activeLink="home"></MyNavbar>
+      <Container>
+        <h1>Home Page</h1>
+      </Container>
     </>
   );
 }

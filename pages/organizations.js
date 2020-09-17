@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import { getOrganizations } from "../lib/organizationService";
 import AppContext from "../context/AppContext";
 import Loading from "../components/common/Loading";
+import MyNavbar from "../components/myNavbar";
 import _ from "lodash";
 
 function Organizations() {
@@ -35,22 +36,25 @@ function Organizations() {
 
   return (
     <>
-      <h1>Organizations Page </h1>
-      {data ? (
-        data.map((org) => {
-          return (
-            <div key={org.id}>
-              <Link href="/organization/[id]" as={`/organization/${org.id}`}>
-                <a>
-                  {org.name} {org.id}
-                </a>
-              </Link>
-            </div>
-          );
-        })
-      ) : (
-        <Loading user={user} redirectParam="organizations" />
-      )}
+      <MyNavbar activeLink="organizations"></MyNavbar>
+      <Container>
+        <h1>Organizations Page </h1>
+        {data ? (
+          data.map((org) => {
+            return (
+              <div key={org.id}>
+                <Link href="/organization/[id]" as={`/organization/${org.id}`}>
+                  <a>
+                    {org.name} {org.id}
+                  </a>
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          <Loading user={user} redirectParam="organizations" />
+        )}
+      </Container>
     </>
   );
 }

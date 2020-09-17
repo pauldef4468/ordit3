@@ -7,7 +7,7 @@ import { getJwt } from "../lib/auth";
 import { getMe } from "../lib/userService";
 import _ from "lodash";
 import "../styles/customTheme.scss";
-import { Container } from "react-bootstrap";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   /** MyApp will run on every page load using any navigation method */
@@ -62,9 +62,7 @@ function MyApp({ Component, pageProps }) {
       }}
     >
       <Layout>
-        <Container className="container-fluid">
-          <Component {...pageProps} />
-        </Container>
+        <Component {...pageProps} />
       </Layout>
     </AppContext.Provider>
   );
