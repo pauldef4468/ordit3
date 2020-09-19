@@ -27,26 +27,32 @@ function MyNavbar({ activeLink }) {
             </Link>
             {/* {isActive()} */}
 
-            <Link href="/organizations" passHref>
-              <Nav.Link active={isActive("organizations")}>Orgs</Nav.Link>
-            </Link>
+            {!_.isEmpty(user) ? (
+              <>
+                <Link href="/organizations" passHref>
+                  <Nav.Link active={isActive("organizations")}>Orgs</Nav.Link>
+                </Link>
 
-            <Link href="/test" passHref>
-              <Nav.Link active={isActive("test")}>Test</Nav.Link>
-            </Link>
-
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <Link href="/organizations" passHref>
-                <NavDropdown.Item>Organizations</NavDropdown.Item>
-              </Link>
-              <Link href="/test" passHref>
-                <NavDropdown.Item>Test</NavDropdown.Item>
-              </Link>
-              <NavDropdown.Divider />
-              <Link href="/test" passHref>
-                <NavDropdown.Item>Test</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
+                <Link href="/test" passHref>
+                  <Nav.Link active={isActive("test")}>Test</Nav.Link>
+                </Link>
+              </>
+            ) : (
+              <>
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <Link href="/organizations" passHref>
+                    <NavDropdown.Item>Organizations</NavDropdown.Item>
+                  </Link>
+                  <Link href="/test" passHref>
+                    <NavDropdown.Item>Test</NavDropdown.Item>
+                  </Link>
+                  <NavDropdown.Divider />
+                  <Link href="/test" passHref>
+                    <NavDropdown.Item>Test</NavDropdown.Item>
+                  </Link>
+                </NavDropdown>
+              </>
+            )}
           </Nav>
 
           {/* Below is pushed to the right */}
