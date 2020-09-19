@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <MyNavbar activeLink="home"></MyNavbar>
       <Container>
-        <h1>Home Page</h1>
+        <h1 className="mt-3">Home Page</h1>
       </Container>
     </>
   );

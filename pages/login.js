@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Router from "next/router";
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import auth from "../lib/auth";
@@ -14,6 +14,7 @@ import styles from "../styles/login.module.css";
 function Login(props) {
   const [data, setData] = useState({ username: "user1", password: "user123" });
   const [error, setError] = useState("");
+  const [spinner, setSpinner] = useState(null);
 
   const [errors, setErrors] = useState({});
   const { user, setUser } = useContext(AppContext);
@@ -33,6 +34,7 @@ function Login(props) {
   async function doSubmit(e) {
     // e.preventDefault();
     try {
+      setSpinner(true);
       // Login and server will set cookie with name "auth"
       const response = await auth.login(data.username, data.password);
       const user = response.data.user;
@@ -40,6 +42,7 @@ function Login(props) {
       const url = redirect ? `/${redirect}` : "/";
       Router.push(url);
     } catch (e) {
+      setSpinner(false);
       setError("Login Failed");
       console.error("Login failed");
     }
@@ -79,7 +82,7 @@ function Login(props) {
               null,
               false
             )}
-            {formUtil.renderButton("Submit")}
+            {formUtil.renderButton("Submit", spinner)}
 
             <div>
               <Link href="/forgotpw">

@@ -1,6 +1,10 @@
 .small-center-form {
-  max-width: 350px;
+  max-width: 500px;
   margin: auto;
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px;
 }
 
 .my-navbar {

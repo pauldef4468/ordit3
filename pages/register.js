@@ -1,15 +1,24 @@
 import { useState } from "react";
 import Router from "next/router";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import auth from "../lib/auth";
 import AppContext from "../context/AppContext";
 import { useContext } from "react";
 import FormUtil from "../components/common/form";
 import MyNavbar from "../components/myNavbar";
 import Joi from "joi-browser";
+import { update } from "../lib/userService";
+import { min } from "lodash";
 
 function Register(props) {
-  const [data, setData] = useState({ username: "", password: "", email: "" });
+  const [data, setData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+  });
+  const [spinner, setSpinner] = useState(null);
 
   const [errors, setErrors] = useState({});
   const { user, setUser } = useContext(AppContext);
@@ -19,26 +28,30 @@ function Register(props) {
   const [serverError, setServerError] = useState(null);
 
   const schema = {
+    firstName: Joi.string().required().label("First Name"),
+    lastName: Joi.string().required().label("Last Name"),
     username: Joi.string().required().label("Username"),
-    password: Joi.string().required().label("Password"),
+    password: Joi.string().min(5).required().label("Password"),
     email: Joi.string().required().email().label("Email"),
   };
 
   async function doSubmit(e) {
     try {
-      console.log("Heree");
+      setSpinner(true);
       // Login and server will set cookie with name "auth"
-      const response = await auth.register(
+      let response = await auth.register(
         data.username,
         data.password,
-        data.email
+        data.email,
+        data.firstName,
+        data.lastName
       );
       const user = response.data.user;
-      //   const response = await getMe();
-      //   const user = response.data;
       setUser(user);
+
       Router.push("/");
     } catch (e) {
+      setSpinner(false);
       alert("Registration Failed");
       console.error("Registration failed");
     }
@@ -62,6 +75,32 @@ function Register(props) {
         <div className="small-center-form">
           <h3 className="mt-3">Register</h3>
           <form onSubmit={formUtil.handleSubmit}>
+            {/* <Form.Row>
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" />
+              </Form.Group>
+            </Form.Row> */}
+            <Form.Row>
+              {formUtil.renderInput(
+                "firstName",
+                "First Name",
+                "text",
+                null,
+                null,
+                false,
+                Col
+              )}
+              {formUtil.renderInput(
+                "lastName",
+                "Last Name",
+                "text",
+                null,
+                null,
+                false,
+                Col
+              )}
+            </Form.Row>
             {formUtil.renderInput(
               "username",
               "User Name",
@@ -81,7 +120,7 @@ function Register(props) {
               null,
               false
             )}
-            {formUtil.renderButton("Submit")}
+            {formUtil.renderButton("Submit", spinner)}
           </form>
         </div>
       </Container>

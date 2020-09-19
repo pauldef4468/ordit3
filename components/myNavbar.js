@@ -49,40 +49,21 @@ function MyNavbar({ activeLink }) {
             </NavDropdown>
           </Nav>
 
-          {/* <Nav className="ml-auto">
-            <NavDropdown
-              className="mr-2"
-              title="User Info"
-              id="basic-nav-dropdown"
-            >
-              <Link href="/organizations" passHref>
-                <NavDropdown.Item>Organizations</NavDropdown.Item>
-              </Link>
-              <Link href="/test" passHref>
-                <NavDropdown.Item>Test</NavDropdown.Item>
-              </Link>
-              <NavDropdown.Divider />
-              <Link href="/test" passHref>
-                <NavDropdown.Item>Test</NavDropdown.Item>
-              </Link>
-            </NavDropdown>
-          </Nav> */}
-
           {/* Below is pushed to the right */}
           <Nav className="ml-auto">
             {_.isEmpty(user) ? (
               <>
+                <Link href="/register" passHref>
+                  <Nav.Link active={isActive("register")}>Sign Up</Nav.Link>
+                </Link>
                 <Link href="/login" passHref>
                   <Nav.Link active={isActive("login")}>Login</Nav.Link>
                 </Link>
-                <Link href="/forgotpw" passHref>
+                {/* <Link href="/forgotpw" passHref>
                   <Nav.Link active={isActive("forgotpw")}>
                     Forgot Password
                   </Nav.Link>
-                </Link>
-                <Link href="/register" passHref>
-                  <Nav.Link active={isActive("register")}>Register</Nav.Link>
-                </Link>
+                </Link> */}
               </>
             ) : (
               <Nav.Link

@@ -38,7 +38,7 @@ function Organizations() {
     <>
       <MyNavbar activeLink="organizations"></MyNavbar>
       <Container>
-        <h1>Organizations Page </h1>
+        <h1>Organizations</h1>
         {data ? (
           data.map((org) => {
             return (

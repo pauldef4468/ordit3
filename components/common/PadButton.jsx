@@ -1,8 +1,8 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import styles from "./PadButton.module.css";
 
-function PadButton({ label, validate }) {
+function PadButton({ label, validate, waiting }) {
   return (
     <Button
       className={styles.button}
@@ -10,6 +10,17 @@ function PadButton({ label, validate }) {
       type="submit"
       disabled={validate}
     >
+      {waiting && (
+        <Spinner
+          className="mr-2"
+          as="span"
+          animation="grow"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+      )}
+
       {label}
     </Button>
   );

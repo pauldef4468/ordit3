@@ -57,7 +57,6 @@ class form {
     this.setErrors(errors);
   };
   handleSubmit = (e) => {
-    console.log("Here");
     e.preventDefault();
 
     const errors = this.validate();
@@ -83,26 +82,38 @@ class form {
     );
   }
 
-  renderInput(name, label, type, mutedText, placeholder, hidden) {
+  // formatFormGroup(controlIdName, hidden,asCol){
+  //   if(!asCol) return <Form.Group controlId={name} hidden={hidden}>
+  // }
+
+  renderInput(name, label, type, mutedText, placeholder, hidden, asValue) {
     const error = this.errors[name];
     //const hidden = type === "hidden" ? "hidden" : null;
     return (
-      <Form.Group controlId={name} hidden={hidden}>
-        <Form.Label>{label}</Form.Label>
-        <Form.Control
-          value={this.data[name]}
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          onChange={this.handleChange}
-        />
-        {error && <div className="alert alert-danger">{error}</div>}
-        <Form.Text className="text-muted">{mutedText}</Form.Text>
-      </Form.Group>
+      <>
+        <Form.Group as={asValue} controlId={name} hidden={hidden}>
+          <Form.Label>{label}</Form.Label>
+          <Form.Control
+            value={this.data[name]}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            onChange={this.handleChange}
+          />
+          {error && <div className="alert alert-danger">{error}</div>}
+          <Form.Text className="text-muted">{mutedText}</Form.Text>
+        </Form.Group>
+      </>
     );
   }
-  renderButton(label) {
-    return <PadButton label={label} validate={this.validate()}></PadButton>;
+  renderButton(label, waitingSpinner) {
+    return (
+      <PadButton
+        label={label}
+        validate={this.validate()}
+        waiting={waitingSpinner}
+      ></PadButton>
+    );
   }
 }
 
