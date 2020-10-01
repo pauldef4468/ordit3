@@ -16,9 +16,17 @@ function Establishment({ est }) {
   const router = useRouter();
   const productTypes = est.product_types;
   const orderMethods = est.order_methods;
+  let currentOrderMethod = null;
 
-  function handleRadioChange() {
-    console.log("here");
+  function handleRadioChange(methodId) {
+    console.log("handleRadioChange");
+    currentOrderMethod = orderMethods.find((orderMethod) => {
+      return orderMethod.id == methodId;
+    });
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("handleSubmit");
   }
 
   return (
@@ -42,7 +50,8 @@ function Establishment({ est }) {
                 ))}
               </ul>
             </div>
-            <Form>
+
+            <Form onSubmit={handleSubmit}>
               <div className="mb-2">
                 <ToggleButtonGroup
                   type="radio"
@@ -65,6 +74,7 @@ function Establishment({ est }) {
                 label="Begin Order"
                 validate={false}
                 waiting={null}
+                type="submit"
               ></PadButton>
             </Form>
           </Col>
