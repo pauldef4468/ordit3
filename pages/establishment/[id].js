@@ -15,6 +15,10 @@ import PadButton from "../../components/common/PadButton";
 function Establishment({ est }) {
   const router = useRouter();
   const productTypes = est.product_types;
+  // TODO get the menus here
+  // Menus will have order methods so when user picks an order method it's picking a
+  // menu actually
+  // this will enable the date / time picker
   const orderMethods = est.order_methods;
   let currentOrderMethod = null;
 
